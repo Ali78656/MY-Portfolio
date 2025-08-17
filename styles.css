@@ -19,6 +19,12 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: "Poppins", sans-serif;
   line-height: 1.6;
@@ -47,22 +53,40 @@ body {
 nav {
   position: fixed;
   top: 0;
+  left: 0; /* Ensure nav stretches from left edge */
+  right: 0; /* Ensure nav stretches to right edge */
   width: 100%;
-  background-color: var(--dark);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: rgba(
+    17,
+    40,
+    79,
+    0.8
+  ); /* Apply transparent background to the full nav */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Apply shadow to the full nav */
+  backdrop-filter: blur(10px); /* Apply blur to the full nav */
+  -webkit-backdrop-filter: blur(10px); /* Apply blur to the full nav */
   z-index: 1000;
   transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Apply subtle border to the full nav */
+  border-radius: 0; /* No border-radius on full width nav */
+  padding: 1rem 0; /* Only vertical padding here, horizontal padding moves to .nav-container */
 }
 
 .nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1rem 2rem;
-  background-color: #11284f;
+  max-width: 1200px; /* Limit content width for centering */
+  margin: 0 auto; /* Centers the content within the full-width nav */
+  padding: 0 2rem; /* Add horizontal padding for content inside the container */
+  background-color: transparent; /* Keep inner container transparent */
+  border-radius: 0; /* No border-radius on inner container */
+  box-shadow: none; /* No shadow on inner container */
+  border: none; /* No border on inner container */
+  backdrop-filter: none; /* No blur on inner container (blur is on nav) */
+  -webkit-backdrop-filter: none; /* No blur on inner container (blur is on nav) */
   position: relative;
+  top: auto;
 }
 
 .logo {
@@ -125,12 +149,21 @@ nav {
   cursor: pointer;
   color: var(--white);
   z-index: 1001;
+  padding: 0.5rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.mobile-menu-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Mobile Navigation */
 @media (max-width: 768px) {
   .nav-container {
-    padding: 1rem;
+    padding: 0.5rem 1rem; /* Reduced vertical padding */
+    margin: 5px; /* Reduced margin */
+    border-radius: 8px; /* Slightly reduced border-radius */
   }
 
   .nav-links {
@@ -150,6 +183,7 @@ nav {
     z-index: 1000;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
+    border-radius: 0; /* Remove border-radius for full-screen menu */
   }
 
   .nav-links.active {
@@ -158,13 +192,15 @@ nav {
   }
 
   .nav-links a {
-    font-size: 1.2rem;
-    padding: 0.5rem 1rem;
+    font-size: 1.5rem; /* Larger font size for mobile links */
+    padding: 0.8rem 1.5rem; /* More padding for touch targets */
     color: var(--white);
+    border-radius: 8px; /* Slightly rounded buttons */
   }
 
   .nav-links a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.15); /* More pronounced hover */
+    transform: translateY(-2px); /* Subtle lift on hover */
   }
 
   .mobile-menu-btn {
@@ -621,25 +657,6 @@ nav {
   font-size: 0.85rem;
   font-weight: 600;
   border: 1px solid var(--accent);
-}
-
-/* Glass Navigation */
-.glass-nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.85);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  transition: all 0.3s ease;
-}
-
-@supports (backdrop-filter: blur(10px)) {
-  .glass-nav {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
 }
 
 /* Contact Section Layout */
